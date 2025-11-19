@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+</head>
+<body>
+    <form id="Form" action="hello.php" method="post">
+        Email: <input type="text" id="email" name="email"><br><br>
+        Password: <input type="password" id="Password" name="Password"><br><br> 
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        let form = document.getElementById("Form");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            let emailInput = document.getElementById("email");
+            let enteredEmail = emailInput.value;
+            let passwordInput = document.getElementById("Password");
+            let enteredPassword = passwordInput.value;
+
+    
+            if (!enteredEmail.includes("@")) {
+                alert("Please enter a valid email address.");
+                return; 
+            } else if (!enteredEmail.includes(".")) { 
+                alert("Enter a valid email address.");
+                return;
+            }
+            if (enteredPassword.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return;
+            } else if (!/[A-Z]/.test(enteredPassword)) { 
+                alert("Password must contain at least one uppercase letter.");
+                return;
+            }
+            alert("Form submitted successfully!");
+            form.submit();
+        });
+    </script>
+</body>
+</html>
