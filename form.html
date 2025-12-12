@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+         
+         body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .form-box {
+        background: white;
+        padding: 25px;
+        width: 320px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .error {
+        color: red;
+        font-size: 13px;
+        margin: 0 0 10px 0;
+        height: 16px; 
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #005fcc;
+    }
+</style>
+    
+</head>
+
+<body >
+    <div class="form-box">
+    <form id="myForm" action="index.php" method="post">
+        Email: <input type="text" name="email" id="email">
+        <p id="emailError" style="color: red; font-size: 14px;" class="error" ></p>
+        Password:<input type="text" name="password" id="password">
+          <p id="passwordError" style="color: red; font-size: 14px;" class="error" ></p>
+        <button type="submit" id="login">Login
+        </button>
+
+    </form>
+    </div>
+<script>
+
+
+        let form = document.querySelector("form");
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("passwordError").textContent = "";
+
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let isValid = true;
+
+  
+    if (!email.includes("@")) {
+        document.getElementById("emailError").textContent = "Email must contain @";
+        isValid = false;
+    } 
+    else if (!email.includes(".")) {
+        document.getElementById("emailError").textContent = "Email must contain .";
+        isValid = false;
+    }
+
+  
+    if (password.length < 8) {
+        document.getElementById("passwordError").textContent = "Password must be at least 8 characters.";
+        isValid = false;
+    }
+    else if (!/[A-Z]/.test(password)) {
+        document.getElementById("passwordError").textContent = "Must contain an uppercase letter.";
+        isValid = false;
+    }
+    else if (!/[0-9]/.test(password)) {
+        document.getElementById("passwordError").textContent = "Must contain a number.";
+        isValid = false;
+    }
+
+    if (isValid) {
+        alert("Form Submitted Successfully!");
+        form.submit();
+    }
+});
+    </script>
+</body>
+
+</html>
